@@ -1,0 +1,58 @@
+<%= form_with(model: post) do |form| %>
+  <% if post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+        <% post.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <p>
+  <div class='field'>
+    <%= form.select(:author_id, Author.all.collect {|a| [ a.full_name, a.id ] }, {}, {:class => "select_author"}) %>
+  </div>
+  </p>
+
+  <% if false %>
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        Author
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <%= Author.all.each do |full_name| %>
+          <li><%= Author.full_name %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+
+  <div class="form-control">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="form-control">
+    <%= form.label :content %>
+    <%= form.text_area :content %>
+  </div>
+
+  <div class="field">
+    <%= form.label :image %>
+    <%= form.text_field :image %>
+  </div>
+
+  <div class="btn btn-success">
+    <%= form.submit %>
+  </div>
+<% end %>
